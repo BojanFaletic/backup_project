@@ -1,7 +1,6 @@
+#!/bin/python3
 import os
 import datetime
-
-import matplotlib.pylab as plt
 
 
 class Backup:
@@ -28,7 +27,7 @@ class Backup:
     # count elements below number threshold in sorted list
     def dates_elements(self, list_of_el, min_number, max_number, time_table):
         dates = []
-        for el,tab in zip(list_of_el, time_table):
+        for el, tab in zip(list_of_el, time_table):
             if min_number <= el < max_number:
                 dates.append(tab)
             if el >= max_number:
@@ -77,5 +76,6 @@ class Backup:
                 dates = dates[1:]
 
 
-b = Backup('backup_pos')
-b.handle_backup()
+if __name__ == "__main__":
+    b = Backup('backup_pos')
+    b.handle_backup()
