@@ -36,5 +36,4 @@ Number of of files is calculated with this function.
         return elements
 ```
 
-Plot of function
-![Alt text](images/saves.png)
+![Alt text](images/saves.png, "Plot of function")
