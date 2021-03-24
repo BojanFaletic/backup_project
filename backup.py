@@ -21,8 +21,9 @@ class Backup:
     # make backup
     def backup(self):
         current_time = datetime.datetime.now().strftime(self.time_format)
-        os.system(
-            f"zip -9 {self.backup_folder}_backup/{current_time}.zip {self.backup_folder}")
+        cmd = f'''zip -9 {self.backup_folder}_backup/{current_time}.zip \
+            {self.backup_folder}'''
+        os.system(cmd)
 
     # count elements below number threshold in sorted list
     def dates_elements(self, list_of_el, min_number, max_number, time_table):
@@ -60,10 +61,13 @@ class Backup:
         # get interval time
         required_times = [0] + self.get_interval_seconds()
         required_interval = [
-            [required_times[i-1], required_times[i]] for i in range(1, len(required_times))]
+            [required_times[i-1], required_times[i]]
+            for i in range(1, len(required_times))
+            ]
 
         # if needed add newest backup
-        if len(self.dates_elements(diff, required_interval[0][0], required_interval[0][1], diff)) == 0:
+        if len(self.dates_elements(diff, required_interval[0][0],
+               required_interval[0][1], diff)) == 0:
             self.backup()
 
         # clean older redundant backup
@@ -77,5 +81,6 @@ class Backup:
 
 
 if __name__ == "__main__":
-    b = Backup('backup_pos')
+    backup_folder = 'backup_pos'
+    b = Backup(backup_folder)
     b.handle_backup()
